@@ -1,0 +1,99 @@
+openapi: 3.0.1
+info:
+  title: MyAPI
+  version: '1.0'
+  description: A short description of the application
+  termsOfService: https://www.example.com/tos
+  contact:
+    email: email@company.abc
+    name: Tobbe
+    url: https://www.example.com/contact
+  license:
+    name: My License
+    url: https://www.example.com/license
+servers:
+  - url: https://my-json-server.typicode.com/bearc0025/api
+    variables: {}
+    description: Bear's server
+  - url: https://my-json-server.typicode.com/hirvikoski/api-lab
+    variables: {}
+paths:
+  /users:
+    summary: User level base operations
+    description: Fetch users, create new user operations
+    get:
+      summary: fetch all users
+      description: Returns all users from the server
+      operationId: fetchUsers
+      responses:
+        2XX:
+          description: success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                    example: bear
+                  username:
+                    type: string
+                    example: 1234asdf
+                  score:
+                    type: integer
+                    example: 55
+                  active:
+                    type: boolean
+                    example: true
+        default:
+          description: Default error sample response
+      tags:
+        - users
+  /attempts:
+    get:
+      summary: fetch all attempts
+      description: Returns all attempts
+      operationId: fetchAttempts
+      responses:
+        2XX:
+          description: success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                    example: a1
+                  score:
+                    type: integer
+                    example: 5
+                  userId:
+                    type: string
+                    example: qwerty
+        default:
+          description: Default error sample response
+          content:
+            application/json:
+              examples:
+                aaa:
+                  value: |-
+                    [
+                      {
+                        "id": "a1",
+                        "score": 5,
+                        "userId": "qwerty"
+                      },
+                      {
+                        "id": "bb2",
+                        "score": 3,
+                        "userId": "xyz123"
+                      },
+                      {
+                        "id": "999",
+                        "score": 8,
+                        "userId": "qwerty"
+                      }
+                    ]
+      tags:
+        - attempts
